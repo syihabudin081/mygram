@@ -1,7 +1,10 @@
 package router
 
-import ("github.com/gin-gonic/gin"
-		"mygram/controllers"
+import (
+	"mygram/controllers"
+	"mygram/middlewares"
+
+	"github.com/gin-gonic/gin"
 )
 
 func StartApp() *gin.Engine {
@@ -28,7 +31,15 @@ func StartApp() *gin.Engine {
 	
 	}
 
-
+	photoRouter := r.Group("/photos")
+	{
+		photoRouter.Use((middlewares.Authentication()))
+		photoRouter.POST("/create",controllers.CreatePhoto)
+		photoRouter.GET("/get",controllers.GetPhotos)
+		photoRouter.GET("/get/:photoId",controllers.GetPhotoById)
+		photoRouter.PUT("/update/:photoId",middlewares.PhotoAuthorization(), controllers.UpdatePhoto)
+		photoRouter.DELETE("/delete/:photoId",middlewares.PhotoAuthorization(), controllers.DeletePhotoByID)
+	}
 
 	return r
 }
