@@ -24,6 +24,7 @@ func StartApp() *gin.Engine {
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register",controllers.UserRegister)
+		userRouter.POST("/login",controllers.UserLogin)
 	
 	}
 
