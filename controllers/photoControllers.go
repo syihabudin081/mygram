@@ -86,11 +86,17 @@ func GetPhotoById(c *gin.Context) {
 func UpdatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
+	contentType := helpers.GetContentType(c)
 	Photo := models.Photo{}
 
 	photoID,_ := strconv.Atoi(c.Param("photoId"))
 
 	userID := uint(userData["id"].(float64)) 
+	if contentType != appJSON {
+		c.ShouldBindJSON(&Photo)
+	} else {
+		c.ShouldBind(&Photo)
+	}
 
 	Photo.UserID = userID
 	Photo.ID = uint(photoID)

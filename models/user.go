@@ -9,17 +9,17 @@ import (
 
 type User struct {
 	GormModel
-	Email        string        `gorm:"type:varchar(255);unique_index;not null" validate:"required,email"`
-	Username     string        `gorm:"type:varchar(255);unique_index;not null" validate:"required"`
-	Password     string        `gorm:"type:varchar(255);not null" validate:"required,min=6"`
-	Age          uint8         `gorm:"not null" validate:"required,gte=9"`
+	Email		string `gorm:"not null;uniqueIndex" json:"email" form:"email" valid:"required~Your email is required,email~ Your email is not valid"`
+	Username	string `gorm:"not null" json:"username" form:"username" valid:"required~ Your Username is required"`
+	Password	string `gorm:"not null" json:"password" form:"password" valid:"required~ Your password is required,minstringlength(6)~ Your password must be at least 6 characters"`
+	Age          uint8         `gorm:"not null" validate:"required,gte=9" json:"age"`
 	Comments     []Comment     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"comments"`
 	Photos       []Photo       `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"photos"`
 	SocialMedias []SocialMedia `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"social_medias"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
-	_,err = govalidator.ValidateStruct(u)
+	_, err = govalidator.ValidateStruct(u)
 	if err != nil {
 		return err
 	}

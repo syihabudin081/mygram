@@ -1,9 +1,9 @@
 package router
 
 import (
+
 	"mygram/controllers"
 	"mygram/middlewares"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,6 +40,28 @@ func StartApp() *gin.Engine {
 		photoRouter.PUT("/update/:photoId",middlewares.PhotoAuthorization(), controllers.UpdatePhoto)
 		photoRouter.DELETE("/delete/:photoId",middlewares.PhotoAuthorization(), controllers.DeletePhotoByID)
 	}
+
+	socmedRouter := r.Group("/socmeds")
+	{
+	socmedRouter.Use((middlewares.Authentication()))
+	socmedRouter.POST("/create",controllers.CreateSocmed)
+	socmedRouter.GET("/get",controllers.GetSocialMedias)
+	socmedRouter.GET("/get/:socmedId",controllers.GetSocialMediaById)
+	socmedRouter.PUT("/update/:socmedId",middlewares.SocmedAuthorization(), controllers.UpdateSocmed)
+	socmedRouter.DELETE("/delete/:socmedId",middlewares.SocmedAuthorization(), controllers.DeleteSocmed)
+	}
+
+	commentRouter := r.Group("/comments")
+	{
+		commentRouter.Use((middlewares.Authentication()))
+		commentRouter.POST("/create/:photoId", controllers.CreateComment)
+		commentRouter.GET("/get/", controllers.GetComments)
+		commentRouter.GET("/get/:commentId", controllers.GetCommentById)
+		commentRouter.PUT("/update/:commentId", middlewares.CommentAuthorization(), controllers.UpdateComment)
+		commentRouter.DELETE("/delete/:commentId", middlewares.CommentAuthorization(), controllers.DeleteComment)
+	}
+
+	
 
 	return r
 }
