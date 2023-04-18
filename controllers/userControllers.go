@@ -12,7 +12,14 @@ var (
 	appJSON = "application/json"
 )
 
-
+// UserRegister registers a new user
+// @Summary Register a new user
+// @Description Create a new user with the given details
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 
+// @Router /users/register [post]
 func UserRegister(c *gin.Context) {
 
 	db := database.GetDB()
@@ -47,6 +54,14 @@ func UserRegister(c *gin.Context) {
 
 }
 
+// UserLogin logs in a user
+// @Summary Login a user
+// @Description Log in a user with the given credentials
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 
+// @Router /users/login [post]
 func UserLogin(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)

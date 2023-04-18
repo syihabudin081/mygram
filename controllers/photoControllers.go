@@ -11,6 +11,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreatePhoto creates a new photo
+// @Summary Create a new photo
+// @Description Create a new photo
+// @Tags photos
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param photo body models.Photo true "Photo"
+// @Success 200 {object} models.Photo
+// @Failure 400 
+// @Router /photos [post]
 func CreatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -42,6 +53,16 @@ func CreatePhoto(c *gin.Context) {
 
 }
 
+// GetPhotos gets all photos
+// @Summary Get all photos
+// @Description Get all photos
+// @Tags photos
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Success 200 {object} models.Photo
+// @Failure 400 
+// @Router /photos [get]
 func GetPhotos(c *gin.Context) {
 	db := database.GetDB()
 	Photos := []models.Photo{}
@@ -62,6 +83,17 @@ func GetPhotos(c *gin.Context) {
 
 }
 
+// GetPhotoById gets a photo by id
+// @Summary Get a photo by id
+// @Description Get a photo by id
+// @Tags photos
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param id path int true "Photo ID"
+// @Success 200 {object} models.Photo
+// @Failure 400 
+// @Router /photos/{id} [get]
 func GetPhotoById(c *gin.Context) {
 	db := database.GetDB()
 	Photo := models.Photo{}
@@ -83,6 +115,18 @@ func GetPhotoById(c *gin.Context) {
 
 }
 
+// UpdatePhoto updates a photo
+// @Summary Update a photo
+// @Description Update a photo
+// @Tags photos
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param id path int true "Photo ID"
+// @Param photo body models.Photo true "Photo"
+// @Success 200 {object} models.Photo
+// @Failure 400 
+// @Router /photos/{id} [put]
 func UpdatePhoto(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -117,6 +161,17 @@ func UpdatePhoto(c *gin.Context) {
 	})
 }
 
+// DeletePhotoByID deletes a photo by id
+// @Summary Delete a photo by id
+// @Description Delete a photo by id
+// @Tags photos
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param id path int true "Photo ID"
+// @Success 200 {object} models.Photo
+// @Failure 400 
+// @Router /photos/{id} [delete]
 func DeletePhotoByID(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

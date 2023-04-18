@@ -1,0 +1,543 @@
+basePath: /api/v1
+definitions:
+  models.Comment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo:
+        $ref: '#/definitions/models.Photo'
+      photoID:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.Photo:
+    properties:
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    required:
+    - caption
+    type: object
+  models.SocialMedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      age:
+        minimum: 9
+        type: integer
+      comments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      photos:
+        items:
+          $ref: '#/definitions/models.Photo'
+        type: array
+      social_medias:
+        items:
+          $ref: '#/definitions/models.SocialMedia'
+        type: array
+      updated_at:
+        type: string
+      username:
+        type: string
+    required:
+    - age
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample API for MyGram application
+  title: MyGram API
+  version: "1"
+paths:
+  /comments/{commentId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a comment
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+      summary: Delete a comment
+      tags:
+      - comments
+    get:
+      consumes:
+      - application/json
+      description: Get a comment by ID
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+      summary: Get a comment by ID
+      tags:
+      - comments
+    put:
+      consumes:
+      - application/json
+      description: Update a comment
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Comment ID
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      - description: Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+      summary: Update a comment
+      tags:
+      - comments
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: Get all photos
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+      summary: Get all photos
+      tags:
+      - photos
+    post:
+      consumes:
+      - application/json
+      description: Create a new photo
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+      summary: Create a new photo
+      tags:
+      - photos
+  /photos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a photo by id
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+      summary: Delete a photo by id
+      tags:
+      - photos
+    get:
+      consumes:
+      - application/json
+      description: Get a photo by id
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+      summary: Get a photo by id
+      tags:
+      - photos
+    put:
+      consumes:
+      - application/json
+      description: Update a photo
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Photo
+        in: body
+        name: photo
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+        "400":
+          description: Bad Request
+      summary: Update a photo
+      tags:
+      - photos
+  /photos/{photoId}/comments:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments for a photo
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+      summary: Get all comments for a photo
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/json
+      description: Create a new comment
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Photo ID
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      - description: Comment
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+        "400":
+          description: Bad Request
+      summary: Create a new comment
+      tags:
+      - comments
+  /socmeds:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      security:
+      - BearerAuth: []
+      summary: Get all social media accounts
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Social Media Account
+        in: body
+        name: Socmed
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+        "400":
+          description: Bad Request
+      security:
+      - BearerAuth: []
+      summary: Create a new social media account
+      tags:
+      - Social Media
+  /socmeds/{socmedId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a social media profile for the authenticated user
+      operationId: delete-socmed
+      parameters:
+      - description: Social media profile ID
+        in: path
+        name: socmedId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      security:
+      - bearerAuth: []
+      summary: Delete a social media profile
+      tags:
+      - Social Media
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: JWT Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Social Media ID
+        in: path
+        name: socmedId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      security:
+      - BearerAuth: []
+      summary: Get a social media account by ID
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: Update a social media profile for the authenticated user
+      operationId: update-socmed
+      parameters:
+      - description: Social media profile ID
+        in: path
+        name: socmedId
+        required: true
+        type: integer
+      - description: Social Media Account
+        in: body
+        name: Socmed
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMedia'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+      security:
+      - bearerAuth: []
+      summary: Update a social media profile
+      tags:
+      - Social Media
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Log in a user with the given credentials
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Login a user
+      tags:
+      - Users
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the given details
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Register a new user
+      tags:
+      - Users
+swagger: "2.0"

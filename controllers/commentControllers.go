@@ -11,6 +11,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
+//create comment
+// @Summary Create a new comment
+// @Description Create a new comment
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param photoId path int true "Photo ID"
+// @Param comment body models.Comment true "Comment"
+// @Success 200 {object} models.Comment
+// @Failure 400
+// @Router /photos/{photoId}/comments [post]
 func CreateComment(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -62,7 +75,18 @@ func CreateComment(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"comment": Comment})
 }
 
-
+// UpdateComment updates a comment
+// @Summary Update a comment
+// @Description Update a comment
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param commentId path int true "Comment ID"
+// @Param comment body models.Comment true "Comment"
+// @Success 200 {object} models.Comment
+// @Failure 400
+// @Router /comments/{commentId} [put]
 func UpdateComment(c *gin.Context) {
 	db := database.GetDB()
 	
@@ -110,6 +134,17 @@ func UpdateComment(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"Message": "Comment updated successfully"})
 }
 
+// DeleteComment deletes a comment
+// @Summary Delete a comment
+// @Description Delete a comment
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param commentId path int true "Comment ID"
+// @Success 200 {object} models.Comment
+// @Failure 400 
+// @Router /comments/{commentId} [delete]
 func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}
@@ -148,7 +183,17 @@ func DeleteComment(c *gin.Context) {
 }
 
 
-
+// GetComments returns all comments for a photo
+// @Summary Get all comments for a photo
+// @Description Get all comments for a photo
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param photoId path int true "Photo ID"
+// @Success 200 {object} models.Comment
+// @Failure 400 
+// @Router /photos/{photoId}/comments [get]
 func GetComments(c *gin.Context) {
 	db := database.GetDB()
 	Comments := []models.Comment{}
@@ -168,6 +213,17 @@ func GetComments(c *gin.Context) {
 	c.JSON(http.StatusOK, Comments)
 }
 
+// GetCommentById returns a comment by ID
+// @Summary Get a comment by ID
+// @Description Get a comment by ID
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param commentId path int true "Comment ID"
+// @Success 200 {object} models.Comment
+// @Failure 400 
+// @Router /comments/{commentId} [get]
 func GetCommentById(c *gin.Context) {
 	db := database.GetDB()
 	Comment := models.Comment{}

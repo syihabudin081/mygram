@@ -11,6 +11,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
+// @Summary Create a new social media account
+// @Tags Social Media
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "JWT Token"
+// @Param Socmed body models.SocialMedia true "Social Media Account"
+// @Success 200 {object} models.SocialMedia
+// @Failure 400 
+// @Router /socmeds [post]
 func CreateSocmed(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -42,6 +53,16 @@ func CreateSocmed(c *gin.Context) {
 
 }
 
+
+// @Summary Get all social media accounts
+// @Tags Social Media
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "JWT Token"
+// @Success 200
+// @Failure 400
+// @Router /socmeds [get]
 func GetSocialMedias(c *gin.Context) {
 	db := database.GetDB()
 	SocialMedias := []models.SocialMedia{}
@@ -62,6 +83,17 @@ func GetSocialMedias(c *gin.Context) {
 
 }
 
+
+// @Summary Get a social media account by ID
+// @Tags Social Media
+// @Security BearerAuth
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "JWT Token"
+// @Param socmedId path int true "Social Media ID"
+// @Success 200 
+// @Failure 400 
+// @Router /socmeds/{socmedId} [get]
 func GetSocialMediaById(c *gin.Context) {
 	db := database.GetDB()
 	SocialMedia := models.SocialMedia{}
@@ -93,6 +125,20 @@ func GetSocialMediaById(c *gin.Context) {
 
 }
 
+
+// UpdateSocmed updates a social media profile for the authenticated user
+// @Summary Update a social media profile
+// @Tags Social Media
+// @Description Update a social media profile for the authenticated user
+// @ID update-socmed
+// @Accept json
+// @Produce json
+// @Security bearerAuth
+// @Param socmedId path int true "Social media profile ID"
+// @Param Socmed body models.SocialMedia true "Social Media Account"
+// @Success 200
+// @Failure 400
+// @Router /socmeds/{socmedId} [put]
 func UpdateSocmed(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
@@ -131,6 +177,18 @@ func UpdateSocmed(c *gin.Context) {
 }
 
 
+// DeleteSocmed deletes a social media profile for the authenticated user
+// @Summary Delete a social media profile
+// @Description Delete a social media profile for the authenticated user
+// @ID delete-socmed
+// @Tags Social Media
+// @Accept json
+// @Produce json
+// @Security bearerAuth
+// @Param socmedId path int true "Social media profile ID"
+// @Success 200 
+// @Failure 400 
+// @Router /socmeds/{socmedId} [delete]
 func DeleteSocmed(c *gin.Context) {
 	db := database.GetDB()
 	Socmed := models.SocialMedia{}
