@@ -1,0 +1,667 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a sample API for MyGram application",
+    "version" : "1",
+    "title" : "MyGram API",
+    "contact" : { }
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/api/v1",
+  "paths" : {
+    "/comments/{commentId}" : {
+      "get" : {
+        "tags" : [ "comments" ],
+        "summary" : "Get a comment by ID",
+        "description" : "Get a comment by ID",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "Comment ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Comment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "comments" ],
+        "summary" : "Update a comment",
+        "description" : "Update a comment",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "Comment ID",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "in" : "body",
+          "name" : "comment",
+          "description" : "Comment",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.Comment"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Comment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "comments" ],
+        "summary" : "Delete a comment",
+        "description" : "Delete a comment",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "commentId",
+          "in" : "path",
+          "description" : "Comment ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Comment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/photos" : {
+      "get" : {
+        "tags" : [ "photos" ],
+        "summary" : "Get all photos",
+        "description" : "Get all photos",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Photo"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "photos" ],
+        "summary" : "Create a new photo",
+        "description" : "Create a new photo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "photo",
+          "description" : "Photo",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.Photo"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Photo"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/photos/{id}" : {
+      "get" : {
+        "tags" : [ "photos" ],
+        "summary" : "Get a photo by id",
+        "description" : "Get a photo by id",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Photo ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Photo"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "photos" ],
+        "summary" : "Update a photo",
+        "description" : "Update a photo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Photo ID",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "in" : "body",
+          "name" : "photo",
+          "description" : "Photo",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.Photo"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Photo"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "photos" ],
+        "summary" : "Delete a photo by id",
+        "description" : "Delete a photo by id",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Photo ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Photo"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/photos/{photoId}/comments" : {
+      "get" : {
+        "tags" : [ "comments" ],
+        "summary" : "Get all comments for a photo",
+        "description" : "Get all comments for a photo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "photoId",
+          "in" : "path",
+          "description" : "Photo ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Comment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "comments" ],
+        "summary" : "Create a new comment",
+        "description" : "Create a new comment",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "photoId",
+          "in" : "path",
+          "description" : "Photo ID",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "in" : "body",
+          "name" : "comment",
+          "description" : "Comment",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.Comment"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.Comment"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/socmeds" : {
+      "get" : {
+        "tags" : [ "Social Media" ],
+        "summary" : "Get all social media accounts",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Social Media" ],
+        "summary" : "Create a new social media account",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "Socmed",
+          "description" : "Social Media Account",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.SocialMedia"
+          }
+        } ],
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/models.SocialMedia"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/socmeds/{socmedId}" : {
+      "get" : {
+        "tags" : [ "Social Media" ],
+        "summary" : "Get a social media account by ID",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "JWT Token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "socmedId",
+          "in" : "path",
+          "description" : "Social Media ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Social Media" ],
+        "summary" : "Update a social media profile",
+        "description" : "Update a social media profile for the authenticated user",
+        "operationId" : "update-socmed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "socmedId",
+          "in" : "path",
+          "description" : "Social media profile ID",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "in" : "body",
+          "name" : "Socmed",
+          "description" : "Social Media Account",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/models.SocialMedia"
+          }
+        } ],
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Social Media" ],
+        "summary" : "Delete a social media profile",
+        "description" : "Delete a social media profile for the authenticated user",
+        "operationId" : "delete-socmed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "socmedId",
+          "in" : "path",
+          "description" : "Social media profile ID",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "security" : [ {
+          "bearerAuth" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      }
+    },
+    "/users/login" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Login a user",
+        "description" : "Log in a user with the given credentials",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/users/register" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Register a new user",
+        "description" : "Create a new user with the given details",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "models.Comment" : {
+      "type" : "object",
+      "properties" : {
+        "created_at" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "integer"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "photo" : {
+          "$ref" : "#/definitions/models.Photo"
+        },
+        "photoID" : {
+          "type" : "integer"
+        },
+        "updated_at" : {
+          "type" : "string"
+        },
+        "user" : {
+          "$ref" : "#/definitions/models.User"
+        },
+        "userID" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "models.Photo" : {
+      "type" : "object",
+      "required" : [ "caption" ],
+      "properties" : {
+        "caption" : {
+          "type" : "string"
+        },
+        "created_at" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "integer"
+        },
+        "photo_url" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "updated_at" : {
+          "type" : "string"
+        },
+        "user" : {
+          "$ref" : "#/definitions/models.User"
+        },
+        "userID" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "models.SocialMedia" : {
+      "type" : "object",
+      "properties" : {
+        "created_at" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "social_media_url" : {
+          "type" : "string"
+        },
+        "updated_at" : {
+          "type" : "string"
+        },
+        "user" : {
+          "$ref" : "#/definitions/models.User"
+        },
+        "userID" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "models.User" : {
+      "type" : "object",
+      "required" : [ "age" ],
+      "properties" : {
+        "age" : {
+          "type" : "integer",
+          "minimum" : 9
+        },
+        "comments" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/models.Comment"
+          }
+        },
+        "created_at" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "integer"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "photos" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/models.Photo"
+          }
+        },
+        "social_medias" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/models.SocialMedia"
+          }
+        },
+        "updated_at" : {
+          "type" : "string"
+        },
+        "username" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
