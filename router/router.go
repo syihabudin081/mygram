@@ -4,7 +4,7 @@ import (
 	"mygram/controllers"
 	"mygram/middlewares"
 	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/cors"
+	
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -16,7 +16,7 @@ import (
 // @BasePath /api/v1
 func StartApp() *gin.Engine {
 	r := gin.Default()
-  r.Use(cors.Default())
+  r.Use(middlewares.CORSMiddleware())
 	// add swagger documentation
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
@@ -64,3 +64,4 @@ func StartApp() *gin.Engine {
 
 	return r
 }
+

@@ -201,3 +201,71 @@ func DeletePhotoByID(c *gin.Context) {
 
 
 }
+
+
+
+//For Upload Images
+
+// func CreatePhoto(c *gin.Context) {
+// 	db := database.GetDB()
+// 	userData := c.MustGet("userData").(jwt.MapClaims)
+// 	contentType := helpers.GetContentType(c)
+
+// 	Photo := models.Photo{}
+// 	userID := uint(userData["id"].(float64))
+
+// 	if contentType != appJSON {
+// 		c.ShouldBindJSON(&Photo)
+// 	} else {
+// 		c.ShouldBind(&Photo)
+// 	}
+
+// 	// Dapatkan file gambar dari request form
+// 	file, err := c.FormFile("image")
+// 	if err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error": "Bad Request",
+// 			"message": err.Error(),
+// 		})
+// 		return
+// 	}
+
+// 	// Simpan gambar ke penyimpanan awan (contoh: Amazon S3)
+// 	imageURL, err := saveToCloudStorage(file)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{
+// 			"error": "Internal Server Error",
+// 			"message": err.Error(),
+// 		})
+// 		return
+// 	}
+
+// 	// Simpan URL gambar ke dalam basis data
+// 	Photo.UserID = userID
+// 	Photo.ImageURL = imageURL
+
+// 	err = db.Debug().Create(&Photo).Error
+
+// 	if err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{
+// 			"error": "Bad Request",
+// 			"message": err.Error(),
+// 		})
+// 		return
+// 	}
+
+// 	c.JSON(http.StatusOK, Photo)
+// }
+
+// // Fungsi untuk menyimpan gambar ke penyimpanan awan (contoh: Amazon S3)
+// func saveToCloudStorage(file *multipart.FileHeader) (string, error) {
+// 	// Implementasikan logika untuk menyimpan gambar ke penyimpanan awan disini
+// 	// Anda perlu mengganti ini sesuai dengan penyimpanan awan yang Anda gunakan
+// 	// Dapatkan URL gambar setelah berhasil diunggah
+// 	// Atau kembalikan kesalahan jika terjadi masalah
+// 	// Contoh: Simpan ke Amazon S3 dan dapatkan URL gambar
+// 	// Replace this with your own implementation
+// 	// Example: Save to Amazon S3 and get the image URL
+// 	imageURL := "https://your-s3-bucket.s3.amazonaws.com/" + file.Filename
+// 	return imageURL, nil
+// }
