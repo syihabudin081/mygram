@@ -58,6 +58,7 @@ func StartApp() *gin.Engine {
 		commentRouter.POST("/create/:photoId", controllers.CreateComment)
 		commentRouter.GET("/get/", controllers.GetComments)
 		commentRouter.GET("/get/:commentId", controllers.GetCommentById)
+		commentRouter.GET("/get/photo/:photoID",controllers.GetCommentsByPhotoID)
 		commentRouter.PUT("/update/:commentId", middlewares.CommentAuthorization(), controllers.UpdateComment)
 		commentRouter.DELETE("/delete/:commentId", middlewares.CommentAuthorization(), controllers.DeleteComment)
 	}

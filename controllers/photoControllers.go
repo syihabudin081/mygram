@@ -265,7 +265,7 @@ func CreatePhoto(c *gin.Context) {
 }
 
 
-// // Fungsi untuk menyimpan gambar ke penyimpanan awan (contoh: Amazon S3)
+// // Fungsi untuk menyimpan gambar ke penyimpanan awan (contoh: GCP)
 
 func saveToCloudStorage(file *multipart.FileHeader) (string, error) {
 	// Your Google Cloud Storage bucket name and service account JSON key file

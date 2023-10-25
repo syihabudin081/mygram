@@ -11,7 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 //create comment
 // @Summary Create a new comment
 // @Description Create a new comment
@@ -248,3 +247,42 @@ func GetCommentById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, Comment)
 }
+
+// GetCommentsByPhotoID returns all comments for a photo by photo ID
+// @Summary Get all comments for a photo by photo ID
+// @Description Get all comments for a photo by photo ID
+// @Tags comments
+// @Accept  json
+// @Produce  json
+// @Param Authorization header string true "JWT Token"
+// @Param photoId path int true "Photo ID"
+// @Success 200 {object} []models.Comment
+// @Failure 400
+// @Router /photos/{photoId}/comments [get]
+func GetCommentsByPhotoID(c *gin.Context) {
+    db := database.GetDB()
+    Comments := []models.Comment{}
+
+    photoID, err := strconv.Atoi(c.Param("photoID"))
+	if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{
+            "error":   "Bad Request",
+            "message": "Invalid photo ID",
+        })
+        return
+    }
+
+    // Preload User untuk mendapatkan informasi pengguna dalam komentar
+    err = db.Debug().Where("photo_id = ?", photoID).Preload("User").Find(&Comments).Error
+
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{
+            "error":   "Bad Request",
+            "message": err.Error(),
+        })
+        return
+    }
+
+    c.JSON(http.StatusOK, Comments)
+}
+
